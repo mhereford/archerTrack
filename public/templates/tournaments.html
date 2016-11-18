@@ -1,0 +1,55 @@
+ <div ng-controller="tournamentCtrl">
+ Tournaments:
+      <br />
+      <input type="text" ng-blur="editing = false" ng-model="tournamentText" /> 
+        <br />
+        <br />
+      <table id="displayArcherTable" class="table">
+          <tr>
+          <th>Select</th>
+            <th>Tournment Name</th>
+            <th class="hide-for-small-only">Host</th>
+            <th>Date</th>
+          </tr>
+    
+          <tr ng-model="tournament" ng-repeat="tournament in tournaments | filter:tournamentText | orderBy:'tourneyDate'">
+            <td>
+              <input type="checkbox" ng-model="tournament.selected" />
+              <span ng-click="tournament.selected = !tournament.selected" ng-change="tournament.selected = true" ng-model="selected"></span>
+            </td>
+
+            <td>
+            	<label ng-hide="editing" ng-click="editing=true">{{tournament.name}}</label>
+      			<input ng-show="editing" ng-blur="editing = false" class="editing-label" type="text" ng-model="tournament.name" ng-change="tournament.edited = true"/>
+			</td>
+			    
+			<td class="hide-for-small-only">
+            	<label ng-hide="editing" ng-click="editing=true">{{tournament.host}}</label>
+      			<input ng-show="editing" ng-blur="editing = false" class="editing-label" type="text" ng-model="tournament.host" ng-change="tournament.edited = true"/>
+			</td>
+			
+			<td>
+            	<label ng-hide="editing" ng-click="editing = true">{{tournament.date | date:'MM/dd/yyyy'}}</label>
+      			<input ng-show="editing" ng-blur="editing = false" class="editing-label" type="date" ng-model="tournament.date" ng-change="tournament.edited = true" ng-bind="tournament.date | date:'MM/dd/yyyy'" />
+			</td>
+          </tr>
+      </table>
+      <br />
+       <br />
+      <a href="" ng-click="showAddTourney = !showAddToruney">Add</a>
+      <a href="" ng-click="updateTournaments(tournaments)">Save</a>
+      <a href="" ng-click="deleteTournament(tournaments)" class="delete">Delete</a>  
+      <br />
+      <br />
+      <br />
+   
+  <form id="addTourneyForm" class="simple-form" ng-show="showAddTourney">Add Tournament:<br />
+    Name: <input type="text" ng-model="tournament.name" ng-change="tournament.edited = true" /><br />
+    Host: <input type="text" ng-model="tournament.host" ng-change="tournament.edited = true" /><br />
+    Date: <input type="date" ng-model="tournament.date" ng-change="tournament.edited = true" ng-bind="date | date:'MM/dd/yyyy'" /><br />
+        <input type="button" ng-click="resetTournametState() " value="Reset" />
+		<input type="submit" ng-click="addTournament(tournament)" value="Save" />
+  </form>
+</div>
+
+

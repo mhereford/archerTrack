@@ -1,0 +1,121 @@
+<div id="addScoresContainer" class="hide-for-small-only" ng-controller="scoreCtrl">
+	     <form id="addScoreForm" class="simple-form" >Add Scores:<br />
+			Name: <select name="scoreArcherSelect" id="scoreArcherSelect" ng-model="score.archer">
+					<option ng-repeat="archer in archers | orderBy:'archerName'" value="{{option.id}}">{{archer.name}}</option>
+					</select><br />
+			Tournament: <select name="scoreTournamentSelect" id="scoreTournamentSelect" ng-model="score.tournament">
+					<option ng-model="tournament" ng-repeat="tournament in tournaments | filter:tournamentText | orderBy:'tournamentName'" value="{{option.id}}">{{tournament.name}}</option>
+					</select><br />
+
+		<table id="displayScoreTable10" class="table">
+		  <tr>
+		  	<th>Select</th>
+			<th>Distance</th>
+          	<th>Round 1</th>
+            <th>Round 2</th>
+            <th>Round 3</th>
+            <th>Total</th>
+          </tr>
+		  
+		  <tr >
+            <td>
+            	<input type="checkbox" ng-model="score.selected" />
+      			<span ng-click="score.selected = !score.selected" ng-change="score.selected = true" ng-model="selected"></span>
+      		</td>
+			<td>10 Meters</td>
+            <td>
+           		<label ng-hide="editing" ng-click="editing=true">{{score.tenMeter1}}</label>
+      			<input ng-show="editing" ng-blur="editing = false" class="editing-label" type="text" ng-model="score.tenMeter1" ng-change="score.edited = true"/>
+			</td>
+            <td>
+            	<label ng-hide="editing" ng-click="editing=true">{{score.tenMeter2}}</label>
+      			<input ng-show="editing" ng-blur="editing = false" class="editing-label" type="text" ng-model="score.tenMeter2" ng-change="score.edited = true"/>
+			</td>
+			<td>
+           		<label ng-hide="editing" ng-click="editing=true">{{score.tenMeter3}}</label>
+      			<input ng-show="editing" ng-blur="editing = false" class="editing-label" type="text" ng-model="score.tenMeter3" ng-change="score.edited = true"/>
+			</td>
+            <td>
+            	<label ng-hide="editing" ng-click="editing=true">{{score.tenMeterTotal}}</label>
+      			<input ng-show="editing" ng-blur="editing = false" class="editing-label" type="text" ng-model="score.tenMeterTotal" ng-change="score.edited = true"/>
+			</td>            
+          </tr>
+		  <tr>
+		  	<td>
+            	<input type="checkbox" ng-model="score.selected" />
+      			<span ng-click="score.selected = !score.selected" ng-change="score.selected = true" ng-model="selected"></span>
+      		</td>
+			<td>15 Meters</td>
+            <td>
+           		<label ng-hide="editing" ng-click="editing=true">{{score.fifteenMeter1}}</label>
+      			<input ng-show="editing" ng-blur="editing = false" class="editing-label" type="text" ng-model="score.fifteenMeter1" ng-change="score.edited = true"/>
+			</td>
+            <td>
+            	<label ng-hide="editing" ng-click="editing=true">{{score.fifteenMeter2}}</label>
+      			<input ng-show="editing" ng-blur="editing = false" class="editing-label" type="text" ng-model="score.fifteenMeter2" ng-change="score.edited = true"/>
+			</td>
+			<td>
+           		<label ng-hide="editing" ng-click="editing=true">{{score.fifteenMeter3}}</label>
+      			<input ng-show="editing" ng-blur="editing = false" class="editing-label" type="text" ng-model="score.fifteenMeter3" ng-change="score.edited = true"/>
+			</td>
+            <td>
+            	<label ng-hide="editing" ng-click="editing=true">{{score.fifteenMeterTotal}}</label>
+      			<input ng-show="editing" ng-blur="editing = false" class="editing-label" type="text" ng-model="score.fifteenMeterTotal" ng-change="score.edited = true"/>
+			</td>            
+          </tr>
+
+		  <tr>
+			<td>
+            	<input type="checkbox" ng-model="score.selected" />
+      			<span ng-click="score.selected = !score.selected" ng-change="score.selected = true" ng-model="selected"></span>
+      		</td>
+			<td>Tournamet Total</td>
+            <td>
+           		<label ng-hide="editing" ng-click="editing=true">{{score.tenMeterTotal}}</label>
+      			<input ng-show="editing" ng-blur="editing = false" class="editing-label" type="text" ng-model="score.tenMeterTotal" ng-change="score.edited = true"/>
+			</td>
+            <td>
+            	<label ng-hide="editing" ng-click="editing=true">{{score.fifteenMeterTotal}}</label>
+      			<input ng-show="editing" ng-blur="editing = false" class="editing-label" type="text" ng-model="score.fifteenMeterTotal" ng-change="score.edited = true"/>
+			</td>
+			<td>
+           		<label ng-hide="editing" ng-click="editing=true">{{score.finalScore}}</label>
+      			<input ng-show="editing" ng-blur="editing = false" class="editing-label" type="text" ng-model="score.finalScore" ng-change="score.edited = true"/>
+			</td>
+          </tr> 
+		</table>
+		<br />
+		<br />
+		<table id="displayTensTotals" class="table">
+		 <h3>Number of Tens</h3>
+		  <tr>
+			<th>Select</th>
+          	<th>10 Meter Tens</th>
+            <th>15 Meter Tens</th>
+            <th>Total Tens</h3>
+          </tr>
+		 <tr ng-model="score">
+		    <td>
+            	<input type="checkbox" ng-model="score.selected" />
+      			<span ng-click="score.selected = !score.selected" ng-change="score.selected = true" ng-model="selected"></span>
+      		</td>
+            <td>
+           		<label ng-hide="editing" ng-click="editing=true">{{score.tenMeterTens}}</label>
+      			<input ng-show="editing" ng-blur="editing = false" class="editing-label" type="text" ng-model="score.tenMeterTens" ng-change="score.edited = true"/>
+			</td>
+            <td>
+            	<label ng-hide="editing" ng-click="editing=true">{{score.fifteenMeterTens}}</label>
+      			<input ng-show="editing" ng-blur="editing = false" class="editing-label" type="text" ng-model="score.fifteenMeterTens" ng-change="score.edited = true"/>
+			</td>
+			<td>
+           		<label ng-hide="editing" ng-click="editing=true">{{score.finalTens}}</label>
+      			<input ng-show="editing" ng-blur="editing = false" class="editing-label" type="text" ng-model="score.finalTens" ng-change="score.edited = true"/>
+			</td>
+          </tr> 
+		</table>
+		<br />
+		<br />
+		  <input type="button" ng-click="reset()" value="Reset" />
+		  <input type="submit" ng-click="update(score)" value="Save" />
+		</form>
+  </div>

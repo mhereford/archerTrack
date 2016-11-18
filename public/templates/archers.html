@@ -1,0 +1,73 @@
+<div ng-controller="mainCtrl">
+    Archer:
+      <br />
+      <input type="text" ng-blur="editing = false" ng-model="archerText" /> 
+      <br />
+      <br />
+      <table id="displayArcherTable" class="table">
+          <tr>
+          	<th>Select</th>
+            <th>Archer Name</th>
+            <th>School</th>
+            <th class="hide-for-small-only">Class</th>
+            <th class="hide-for-small-only">Boy/Girl</>
+          </tr>
+    
+          <tr ng-model="archer" ng-repeat="archer in archers | filter:archerText | orderBy:'archerName'">
+            <td>
+            	<input type="checkbox" ng-model="archer.selected" />
+      			<span ng-click="archer.selected = !archer.selected" ng-change="archer.selected = true" ng-model="selected"></span>
+      		</td>
+            <td>
+           		<label ng-hide="editing" ng-click="editing=true">{{archer.name}}</label>
+      			<input ng-show="editing" ng-blur="editing = false" class="editing-label" type="text" ng-model="archer.name" ng-change="archer.edited = true"/>
+			</td>
+            <td>
+            	<label ng-hide="editing" ng-click="editing=true">{{archer.school}}</label>
+      			<input ng-show="editing" ng-blur="editing = false" class="editing-label" type="text" ng-model="archer.school" ng-change="archer.edited = true"/>
+			</td>
+            <td class="hide-for-small-only">
+            	<label ng-hide="editing" ng-click="editing = true">{{archer.class}}</label>
+      			<input ng-show="editing" ng-blur="editing = false" class="editing-label" type="select" ng-model="archer.class" ng-change="archer.edited = true"/>
+				<select name="schoolClass" ng-model="archer.class" ng-hide="!edited" ng-show="edited" ng-change="archer.edited = true"> <option value=""></option>
+											<option value="Freshman">Freshman</option>
+											<option value="Sophmore">Sophmore</option>
+											<option value="Junior">Junior</option>
+											<option value="Senior">Senior</option>
+			</td>
+            <td class="hide-for-small-only">
+            	<label ng-hide="editing" ng-click="editing=true">{{archer.gender}}</label>
+      			<input ng-show="editing" ng-blur="editing = false" class="editing-label" type="select" ng-model="archer.gender" ng-change="archer.edited = true"/>
+				<select name="archerGender" ng-model="archer.gender" ng-change="archer.edited = true">
+											<option value="girl">girl</option>
+											<option value="boy">boy</option>	
+            </td>
+          </tr>
+      </table>
+      <br />
+      <br />
+      <a href="" ng-click="showAddForm = !showAddForm">Add</a>
+      <a href="" ng-click="updateArchers(archers)">Save</a>
+      <a href="" ng-click="deleteArcher(archers)" class="delete">Delete</a>  
+      <br />
+      <br />
+      <br />  
+    <form id="addArcherForm" class="simple-form" ng-show="showAddForm" >Add Archer:<br />
+      Name: <input type="text" ng-model="archer.name" ng-change="archer.edited = true" clear-field /><br />
+			<span ng-bind="name"></span>
+      School: <input type="text" ng-model="archer.school" ng-change="archer.edited = true"/><br />
+      Gender: <input type="radio" ng-model="archer.gender"  ng-change="archer.edited = true" value="boy" />boy
+              <input type="radio" ng-model="archer.gender"  ng-change="archer.edited = true" value="girl" />girl
+              <br />
+      Class: <input type="radio" ng-model="archer.class" ng-change="archer.edited = true" value="Freshman" />Freshman
+              <input type="radio" ng-model="archer.class"  ng-change="archer.edited = true" value="Sophmore" />Sophmore
+              <input type="radio" ng-model="archer.class"  ng-change="archer.edited = true" value="Junior" />Junior
+              <input type="radio" ng-model="archer.class"  ng-change="archer.edited = true" value="Senior" />Senior
+              <br />
+              <input type="button" ng-click="resetArcherState(); location.reload(false)" value="Reset" />
+              <input type="submit" ng-click="addArcher(archer); location.reload(false)" value="Save" />
+    </form>
+
+    <br />
+     <br />
+  </div>
